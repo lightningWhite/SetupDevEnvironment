@@ -21,11 +21,11 @@ Then the environment will be all set up with just a few commands. Enjoy!
 * Bash Aliases
 
 ### .vimrc
-* Map <jk> to <Esc>
+* Map `jk` to `Esc`
 
 ### .gitignore_global
-* Ignore .vscode/
-* Runs git config --global core.excludesfile ~/.gitignore_global
+* Ignore `.vscode/`
+* Runs `git config --global core.excludesfile ~/.gitignore_global`
 
 ## Additions
 As additional environmental conveniences come up, this should be expanded
