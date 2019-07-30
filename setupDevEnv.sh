@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 echo
 echo
@@ -12,7 +12,7 @@ echo "        ---   -----                      "
 echo
 echo
 
-echo Do you want to restore the previous setup? [y/n]
+echo Do you want to restore the previous setup? (Entering 'n' will run the setup) [y/n]
 read doRestore
 echo
 
