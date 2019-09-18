@@ -4,6 +4,7 @@
 "              newbie, basing your first .vimrc on this file is a good choice.
 "              If you're a more advanced user, building your own .vimrc based
 "              on this file is still a good idea.
+" Customized: By Daniel Hornberger
  
 "------------------------------------------------------------
 " Features {{{1
@@ -13,16 +14,61 @@
  
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
+" This also makes it so Vim doesn't try to be reverse compatible with Vi.
 set nocompatible
  
+" Vundle necessary things are marked with <vundle>
+" Comment these out if I don't have this set up
+
+"------------------------------------------------------------
+" Vundle Vim Plugin Manager Setup
+
+" Vundle necessary things are marked with <vundle>
+" Comment these out if I don't have this set up
+
+" https://www.digitalocean.com/community/tutorials/how-to-use-vundle-to-manage-vim-plugins-on-a-linux-vps
+" All plugins must be declared between the call vunlde#begin() and
+" vundle#end()
+
+" To install plugins, run :PluginInstall
+" To update plugins, run :PluginInstall or :PluginInstall!, the latter
+" will tell vundle to reinstall all of the plugins. 
+"
+" To search for a plugin with vundle: :PluginSearch! name_of_plugin
+" To install a plugin, move the cursor to the plugin and press 'i'
+" Remember to update the .vimrc with the plugin name below.
+"
+" View installed plugins: :PluginList
+" 
+" Remove a plugin: After running :PluginList, type 'D' next to the name of the
+" plugin to be removed. Then remove it from the .vimrc file.
+" A plugin can also be removed by just removing it from the .vimrc file. Then
+" run :PluginClean.
+
+" <vundle> Turn this off until after Vundle is set up 
+" filetype off
+
+" <vundle> Set vim's runtime path with vundle location and initialize it
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#begin()
+
+" <vundle> This is the vundle package on GitHub
+" Plugin 'gmarik/vundle'
+
+" Code completion engine plugin. Note: This is pretty laggy.
+" Plugin 'ycm-core/YouCompleteMe'
+
+" call vundle#end()
+"------------------------------------------------------------------------------
+
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
 " and for plugins that are filetype specific.
 filetype indent plugin on
- 
+
 " Enable syntax highlighting
 syntax on
- 
+
  
 "------------------------------------------------------------
 " Must have options {{{1
@@ -64,7 +110,7 @@ set hlsearch
 " such, it may be a good idea to disable them and use the securemodelines
 " script, <http://www.vim.org/scripts/script.php?script_id=1876>.
 " set nomodeline
- 
+
  
 "------------------------------------------------------------
 " Usability options {{{1
