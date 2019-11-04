@@ -188,6 +188,15 @@ set expandtab
 "set shiftwidth=2
 "set tabstop=2
 
+
+"------------------------------------------------------------
+" Copy and paste to and from the clipboard
+" Note: vim-tkg needs to be installed since it supports
+" clipboard. Also, if using this in WSL, VcXsrv needs to be
+" installed on Windows and stared using XLaunch. Selecting 
+" the default XLaunch settings works.
+:set clipboard=unnamedplus
+
  
 "------------------------------------------------------------
 " Mappings {{{1
