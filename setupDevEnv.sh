@@ -81,5 +81,8 @@ cp .bashrc ~/. && source ~/.bashrc
 cp .vimrc ~/.
 cp .gitignore_global ~/. && git config --global core.excludesfile ~/.gitignore_global
 
+# This can be run to get some nice git graph functionality
+# git config --global alias.graph 'log --graph --all --pretty=format:"%Cblue%h%Creset %s%Cred%d%n"'
+
 echo
 echo The setup is complete!
