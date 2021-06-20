@@ -111,7 +111,7 @@ set hlsearch
 " script, <http://www.vim.org/scripts/script.php?script_id=1876>.
 " set nomodeline
 
- 
+
 "------------------------------------------------------------
 " Usability options {{{1
 "
@@ -170,8 +170,14 @@ set notimeout ttimeout ttimeoutlen=200
  
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
- 
- 
+
+" Cause window splits to happen below the current window
+set splitbelow
+
+" Set the terminal window size so it doesn't take up half the screen
+set termwinsize=10x0
+
+
 "------------------------------------------------------------
 " Indentation options {{{1
 "
@@ -187,15 +193,6 @@ set expandtab
 " four characters wide.
 "set shiftwidth=2
 "set tabstop=2
-
-
-"------------------------------------------------------------
-" Copy and paste to and from the clipboard
-" Note: vim-tkg needs to be installed since it supports
-" clipboard. Also, if using this in WSL, VcXsrv needs to be
-" installed on Windows and stared using XLaunch. Selecting 
-" the default XLaunch settings works.
-:set clipboard=unnamedplus
 
  
 "------------------------------------------------------------
@@ -213,5 +210,13 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
- 
 "------------------------------------------------------------
+
+"------------------------------------------------------------
+" Copy and paste to and from the clipboard
+" Note: vim-tkg needs to be installed since it supports
+" clipboard. Also, if using this in WSL, VcXsrv needs to be
+" installed on Windows and stared using XLaunch. Selecting 
+" the default XLaunch settings works.
+:set clipboard=unnamedplus 
+
