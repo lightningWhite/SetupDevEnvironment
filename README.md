@@ -40,3 +40,16 @@ Enjoy!
 As additional environmental conveniences come up, this should be expanded
 and maintained. This will make setting up a new environment easy and 
 repeatable. 
+
+## Updates - TODO: Clean this up
+
+### Configuring Vim
+
+Install Vundle (vim plugin manager):
+
+- See [Vundle Docs](https://github.com/VundleVim/Vundle.vim#about)
+- `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+- Update the vimrc according to the documentation. This is already in the .vimrc file in this repo.
+- Add the desired plugins to the .vimrc file as documented
+  - Plugin 'ycm-core/YouCompleteMe'
+- Run vim, and execute `:PluginInstall` to install the plugins
