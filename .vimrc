@@ -16,60 +16,76 @@
 " have made, as well as sanely reset options when re-sourcing .vimrc
 " This also makes it so Vim doesn't try to be reverse compatible with Vi.
 set nocompatible
- 
-" Vundle necessary things are marked with <vundle>
-" Comment these out if I don't have this set up
 
-"------------------------------------------------------------
-" Vundle Vim Plugin Manager Setup
+" Vundle Plugin Management
+filetype off
 
-" Vundle necessary things are marked with <vundle>
-" Comment these out if I don't have this set up
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" https://www.digitalocean.com/community/tutorials/how-to-use-vundle-to-manage-vim-plugins-on-a-linux-vps
-" All plugins must be declared between the call vunlde#begin() and
-" vundle#end()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" To install plugins, run :PluginInstall
-" To update plugins, run :PluginInstall or :PluginInstall!, the latter
-" will tell vundle to reinstall all of the plugins. 
-"
-" To search for a plugin with vundle: :PluginSearch! name_of_plugin
-" To install a plugin, move the cursor to the plugin and press 'i'
-" Remember to update the .vimrc with the plugin name below.
-"
-" View installed plugins: :PluginList
-" 
-" Remove a plugin: After running :PluginList, type 'D' next to the name of the
-" plugin to be removed. Then remove it from the .vimrc file.
-" A plugin can also be removed by just removing it from the .vimrc file. Then
-" run :PluginClean.
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
 
-" <vundle> Turn this off until after Vundle is set up 
-" filetype off
+" Git-in-Vim plugin
+" Plugin 'tpope/vim-fugitive'
 
-" <vundle> Set vim's runtime path with vundle location and initialize it
-" set rtp+=~/.vim/bundle/vundle/
-" call vundle#begin()
+" Code auto-completion
+Plugin 'ycm-core/YouCompleteMe'
 
-" <vundle> This is the vundle package on GitHub
-" Plugin 'gmarik/vundle'
+" File browser
+Plugin 'preservim/nerdtree'
 
-" Code completion engine plugin. Note: This is pretty laggy.
-" Plugin 'ycm-core/YouCompleteMe'
 
-" call vundle#end()
-"------------------------------------------------------------------------------
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
 " and for plugins that are filetype specific.
-filetype indent plugin on
+filetype plugin indent on    " required for Vundle
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" Remove a plugin: After running :PluginList, type 'D' next to the name of the
+" plugin to be removed. Then remove it from the .vimrc file.
+" A plugin can also be removed by just removing it from the .vimrc file. Then
+" run :PluginClean.
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"------------------------------------------------------------------------------
+
+" YouCompleteMe Specific Settings
+" Use the experimental semantic highlighting feature
+let g:ycm_enable_semantic_highlighting=1
+
+" NERDTree Specific Settings
+" Mapping to toggle the NERDTree window
+nnoremap ,t :NERDTreeToggle<CR>
 
 " Enable syntax highlighting
 syntax on
 
- 
+
+" Show the tabline at the top of vim
+set showtabline=2
+
+" Allow switching tabs with shortcuts
+nnoremap <C-k> :tabn<CR>
+nnoremap <C-j> :tabp<CR>
+
 "------------------------------------------------------------
 " Must have options {{{1
 "
@@ -105,6 +121,9 @@ set showcmd
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
 " mapping of <C-L> below)
 set hlsearch
+
+" Highligh search words while typing them
+set incsearch
  
 " Modelines have historically been a source of security vulnerabilities. As
 " such, it may be a good idea to disable them and use the securemodelines
