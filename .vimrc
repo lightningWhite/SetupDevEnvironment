@@ -41,6 +41,11 @@ Plugin 'ycm-core/YouCompleteMe'
 " File browser
 Plugin 'preservim/nerdtree'
 
+" Clang-format on save
+Plugin 'rhysd/vim-clang-format'
+
+" A whole bunch of colorschemes
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -67,13 +72,30 @@ filetype plugin indent on    " required for Vundle
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------
+" Plugin Specific Configuration
+"
 " YouCompleteMe Specific Settings
 " Use the experimental semantic highlighting feature
 let g:ycm_enable_semantic_highlighting=1
+" GoTo shortcut
+nnoremap ,jd :YcmCompleter GoTo<CR>
+
 
 " NERDTree Specific Settings
 " Mapping to toggle the NERDTree window
 nnoremap ,t :NERDTreeToggle<CR>
+" Mapping to focus the NERDTree window
+nnoremap ff :NERDTreeFocus<CR>
+
+" vim-clang-format Specific Settings
+let g:clang_format#auto_format=1 " Use a .clang-format file in the project
+
+" flazz/vim-colorschemes
+set t_Co=256 " Use 256 color mode to make sure colorschemes look correct
+colorscheme sean
+
+"------------------------------------------------------------------------------
 
 " Enable syntax highlighting
 syntax on
@@ -83,8 +105,9 @@ syntax on
 set showtabline=2
 
 " Allow switching tabs with shortcuts
-nnoremap <C-k> :tabn<CR>
-nnoremap <C-j> :tabp<CR>
+nnoremap K :tabn<CR>
+nnoremap J :tabp<CR>
+
 
 "------------------------------------------------------------
 " Must have options {{{1
