@@ -53,3 +53,75 @@ Install Vundle (vim plugin manager):
 - Add the desired plugins to the .vimrc file as documented
   - Plugin 'ycm-core/YouCompleteMe'
 - Run vim, and execute `:PluginInstall` to install the plugins
+- Compile YouCompleteMe by following the installation instructions
+  - In short, you probably just go to ~/.vim/YouCompletMe and run ./install.py
+- For YouCompleteMe to find the function signatures and so forth, you need to
+  Generate a compilation database. This can be done when running cmake by 
+  adding the required flag to the rest of them:
+  `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`.
+- Then symlink the generated `compile_commands.json` file to the root of the
+  project: `ln -sf ~/full/path/to/compile_commands.json ~/full/path/to/project/root`
+- Now when you open a file within the project, things should work
+- Here's an example of a compile command that can be run from anywhere to compile
+  a cmake C++ project:
+  `(cd ~/path/to/build_dir/; cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DDEBIAN_BUILD=True -DCMAKE_BUILD_TYPE=Debug; make -j $(nproc);)`
+
+### Customized Vim Usage Tips
+
+Here are some commonly used key commands when using vim with the .vimrc in this repo.
+
+| Command  | Action |
+|----------|--------|
+| i        | Enter insert mode |
+| jk       | Exit insert mode or other commands (Esc equivalent) |
+| j        | Move the cursor down when not in insert mode |
+| k        | Move the cursor up when not in insert mode |
+| h        | Move the cursor left when not in insert mode |
+| l        | Move the cursor right when not in insert mode |
+| Shift+:  | Enters the command mode at the bottom |
+| :w       | Write/save the buffer |
+| :q       | Quit and close the buffer |
+| :qa      | Quit and close all buffers |
+| :q!      | Quit and close without saving |
+| y        | Yank/Copy selection |
+| yy       | Yank/Copy the whole line |
+| p        | Paste |
+| dd       | Delete a whole line |
+| u        | Undo |
+| Ctrl+r   | Redo |
+| r        | Replace the character under the cursor |
+| cw       | Change the word under the cursor |
+| w        | Move the cursor forward a word |
+| b        | Move the cursor back a word |
+| v        | Visual mode - allows you to select text for copying or whatever |
+| /        | Enter search mode - just type what you're looking for after pushing this key and then hit enter |
+| *        | Search all occurances of what's under the cursor |
+| n        | Move to the next search occurance |
+| N        | Move to the previous search occurance |
+| Ctrl+l   | Clear the highlights |
+| ,t       | Toggle opening the NERDTree window for directory navigation |
+| t        | If you hit this key in the NERDTree window, a new tab will be opened and switched to for the selected file |
+| T        | If you hit this key in the NERDTree window, a new tab will be opened but not switched to for the selected file |
+| J        | Switch to the tab to the left |
+| K        | Switch to the tab to the right |
+| ff       | This will focus the cursor in the NERDTree window - helpful after opening a tab or something |
+| ,jd      | GoTo the declaration or definition of whatever is under the cursor (YouCompleteMe) |
+| Ctrl+o   | Go back to wherever you jumped from |
+| %s/searchText/replaceText/gc | Search and replace globally in the file and ask for a confirmation for each replacement |
+| :vsp     | Split the window vertically |
+| :sp      | Split the window horizontally |
+| Ctrl+ww  | Switch to another window |
+| Ctl+v    | Enter visual block mode |
+| I        | When in visual block mode, this will put the characters typed on every selected line after pressing 'jk' or Esc | 
+| 0        | Go to the first of the line |
+| $        | Go to the end of the line |
+| <line#>gg| Go to the line number
+| gg       | Go to the top of the buffer |
+| GG       | Go to the bottom of the buffer |
+|:colorscheme <name> | Change the colorscheme |
+
+
+
+
+
+
