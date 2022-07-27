@@ -119,6 +119,10 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | gg       | Go to the top of the buffer |
 | GG       | Go to the bottom of the buffer |
 |:colorscheme <name> | Change the colorscheme |
+| q<character> | Begin recording a macro (series of key commands) |
+| @<character> | Execute the commands recorded in the macro |
+| #@<character> | Execute the macro # of times |
+| :term | Open a terminal in another window |
 
 
 
