@@ -87,6 +87,8 @@ nnoremap ,jd :YcmCompleter GoTo<CR>
 nnoremap ,t :NERDTreeToggle<CR>
 " Mapping to focus the NERDTree window
 nnoremap ff :NERDTreeFocus<CR>
+" Mapping to open NERDTree at the file in the editor
+nnoremap ,f :NERDTreeFind<CR>
 
 " vim-clang-format Specific Settings
 let g:clang_format#auto_format=1 " Use a .clang-format file in the project

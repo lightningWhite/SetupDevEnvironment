@@ -100,11 +100,12 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | N        | Move to the previous search occurance |
 | Ctrl+l   | Clear the highlights |
 | ,t       | Toggle opening the NERDTree window for directory navigation |
+| ff       | This will focus the cursor in the NERDTree window - helpful after opening a tab or something |
+| ,f       | This will open the NERDTree window with the cursor on the file currently in the editor |
 | t        | If you hit this key in the NERDTree window, a new tab will be opened and switched to for the selected file |
 | T        | If you hit this key in the NERDTree window, a new tab will be opened but not switched to for the selected file |
 | J        | Switch to the tab to the left |
 | K        | Switch to the tab to the right |
-| ff       | This will focus the cursor in the NERDTree window - helpful after opening a tab or something |
 | ,jd      | GoTo the declaration or definition of whatever is under the cursor (YouCompleteMe) |
 | Ctrl+o   | Go back to wherever you jumped from |
 | %s/searchText/replaceText/gc | Search and replace globally in the file and ask for a confirmation for each replacement |
