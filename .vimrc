@@ -218,8 +218,11 @@ set pastetoggle=<F11>
 " Cause window splits to happen below the current window
 set splitbelow
 
+" Cause window splits to happen to the right of the current window
+set splitright
+
 " Set the terminal window size so it doesn't take up half the screen
-set termwinsize=10x0
+"set termwinsize=10x0
 
 
 "------------------------------------------------------------

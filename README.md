@@ -124,6 +124,8 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | @<character> | Execute the commands recorded in the macro |
 | #@<character> | Execute the macro # of times |
 | :term | Open a terminal in another window |
+| m<character> | Set a marker named <character> at cursor location |
+| `<character> | Go to marker indicated by <character> |
 
 
 
