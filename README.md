@@ -123,10 +123,11 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | q<character> | Begin recording a macro (series of key commands) |
 | @<character> | Execute the commands recorded in the macro |
 | #@<character> | Execute the macro # of times |
-| :term | Open a terminal in another window |
+| :term | Open a terminal in another window below the current one |
+| :term | Open a terminal in another window to the side of the current one |
+| Ctrl+w N | Enter vim text mode inside of an open terminal window (hit 'i' to exit) |
 | m<character> | Set a marker named <character> at cursor location |
 | `<character> | Go to marker indicated by <character> |
-
 
 
 
