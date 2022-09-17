@@ -17,38 +17,30 @@
 " This also makes it so Vim doesn't try to be reverse compatible with Vi.
 set nocompatible
 
-" Vundle Plugin Management
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Keep Plugin commands between plug#begin/end.
 
 " Git-in-Vim plugin
-" Plugin 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
 " Code auto-completion
-Plugin 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 
 " File browser
-Plugin 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
 
 " Clang-format on save
-Plugin 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 
 " A whole bunch of colorschemes
-Plugin 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
@@ -58,17 +50,10 @@ filetype plugin indent on    " required for Vundle
 "filetype plugin on
 "
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"  :PlugInstall       - install the plugins listed in ~/.vimrc
+"  :PlugUpdate        - update the installed plugins
+"  :PlugUpdate <name> - update a specific plugin
 "
-" Remove a plugin: After running :PluginList, type 'D' next to the name of the
-" plugin to be removed. Then remove it from the .vimrc file.
-" A plugin can also be removed by just removing it from the .vimrc file. Then
-" run :PluginClean.
-"
-" see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "------------------------------------------------------------------------------
 
