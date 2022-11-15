@@ -54,7 +54,11 @@ Install Vundle (vim plugin manager):
   - Plugin 'ycm-core/YouCompleteMe'
 - Run vim, and execute `:PluginInstall` to install the plugins
 - Compile YouCompleteMe by following the installation instructions
-  - In short, you probably just go to ~/.vim/YouCompletMe and run ./install.py
+  - Install a few dependencies:
+    ```
+    apt install build-essential cmake vim-nox python3-dev
+    ```
+  - To to ~/.vim/plugged/YouCompletMe and run ./install.py --all
 - For YouCompleteMe to find the function signatures and so forth, you need to
   Generate a compilation database. This can be done when running cmake by 
   adding the required flag to the rest of them:
