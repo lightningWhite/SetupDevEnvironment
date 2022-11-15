@@ -37,29 +37,47 @@ Enjoy!
 * Runs `git config --global core.excludesfile ~/.gitignore_global`
 
 ## Additions
+
 As additional environmental conveniences come up, this should be expanded
 and maintained. This will make setting up a new environment easy and 
 repeatable. 
 
-## Updates - TODO: Clean this up
+## Configuring Vim
 
-### Configuring Vim
+TODO: Update the `setupVim.sh` script and document its use here.
 
-Install Vundle (vim plugin manager):
+Before doing the following, make sure the `.vimrc` file of this repo is copied
+to ~/.vimrc first.
 
-- See [Vundle Docs](https://github.com/VundleVim/Vundle.vim#about)
-- `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-- Update the vimrc according to the documentation. This is already in the .vimrc file in this repo.
-- Add the desired plugins to the .vimrc file as documented
-  - Plugin 'ycm-core/YouCompleteMe'
-- Run vim, and execute `:PluginInstall` to install the plugins
-- Compile YouCompleteMe by following the installation instructions
-  - Install a few dependencies:
-    ```
-    apt install build-essential cmake vim-nox python3-dev
-    ```
-  - To to ~/.vim/plugged/YouCompletMe and run ./install.py --all
-- For YouCompleteMe to find the function signatures and so forth, you need to
+Install `vim-plug` to manage plugins more easily:
+
+```bash
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+Start Vim, and run the following to install the plugins defined in the .vimrc file:
+
+```
+:PlugInstall
+```
+
+Close Vim, and navigate to the YouCompleteMe directory to finish its installation:
+
+```
+cd ~/.vim/plugged/YouCompleteMe
+# Compile and install
+./install.py --all
+
+# NOTE: If the above failed, you may have to install the following dependencies
+# and try again:
+apt install build-essential cmake vim-nox python3-dev npm
+```
+
+You can now start vim, and everything should be set up.
+
+To set up a project with YouCompleteMe
+
+- To find the function signatures and so forth, you need to
   Generate a compilation database. This can be done when running cmake by 
   adding the required flag to the rest of them:
   `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`.
