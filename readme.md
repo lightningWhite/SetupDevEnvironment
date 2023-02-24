@@ -44,7 +44,13 @@ repeatable.
 
 ## Configuring Vim
 
-TODO: Update the `setupVim.sh` script and document its use here.
+The `setupVim.sh` script will set everything up for you.
+Simply run `./setupVim.sh` and follow any prompts.
+Elevated privileges are required since additional packages are installed.
+
+This script will copy the .vimrc file to ~/.vimrc, install any dependencies,
+and install the plugins listed in the .vimrc.
+See the script for details.
 
 Before doing the following, make sure the `.vimrc` file of this repo is copied
 to ~/.vimrc first.
@@ -56,22 +62,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 ```
 
 Start Vim, and run the following to install the plugins defined in the .vimrc file:
-
-```
-:PlugInstall
-```
-
-Close Vim, and navigate to the YouCompleteMe directory to finish its installation:
-
-```
-cd ~/.vim/plugged/YouCompleteMe
-# Compile and install
-./install.py --all
-
-# NOTE: If the above failed, you may have to install the following dependencies
-# and try again:
-apt install build-essential cmake vim-nox python3-dev npm
-```
 
 You can now start vim, and everything should be set up.
 
