@@ -78,6 +78,15 @@ To set up a project with YouCompleteMe
   a cmake C++ project:
   `(cd ~/path/to/build_dir/; cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DDEBIAN_BUILD=True -DCMAKE_BUILD_TYPE=Debug; make -j $(nproc);)`
 
+To use vim as the default editor, run `git config --global core.editor vim`.
+You can also setup git to use vimdiff as the merge conflict resolution tool.
+To do this, run `git config --global merge.tool vimdiff`.
+Then when merging and a conflict is encountered, run `git mergetool` to open
+a three-way compare (local, base, and remote), and the actual file at the
+bottom. This makes it easy to see what your changes were, what the common
+parent is, and what is coming from the remote. Simply edit the bottom window
+to what it should be, save with :wqa. Then run `git commit` to finish the merge.
+
 ### Customized Vim Usage Tips
 
 Here are some commonly used key commands when using vim with the .vimrc in this repo.
