@@ -3,7 +3,7 @@ Development Environment Setup
 
 # Overview
 
-When ever getting on a new machine, development container, or virtual machine, 
+When getting on a new machine, development container, or virtual machine, 
 there are several things I miss that I usually have configured in my Linux 
 development environment. This setup, though simple, takes time and effort
 and it really should be automated. 
