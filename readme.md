@@ -3,10 +3,10 @@ Development Environment Setup
 
 # Overview
 
-Whenever getting on a new machine, development container, or virtual machine, 
+When getting on a new machine, development container, or virtual machine, 
 there are several things I miss that I usually have configured in my Linux 
 development environment. This setup, though simple, takes time and effort
-and it really can be automated. 
+and it really should be automated. 
 
 This repository contains some configuration files for some of the tools I
 commonly use. To use it, clone the repository to your local machine and run
