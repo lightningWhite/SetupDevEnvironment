@@ -19,5 +19,5 @@ vim +'PlugInstall --sync' +qa
 
 # Install dependencies and compile YouCompleteMe
 echo "Compiling and setting up YouCompleteMe..."
-sudo apt install build-essential cmake vim-nox python3-dev npm
+sudo apt install build-essential cmake vim-nox python3-dev npm golang
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all)
