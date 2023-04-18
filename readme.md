@@ -8,36 +8,7 @@ there are several things I miss that I usually have configured in my Linux
 development environment. This setup, though simple, takes time and effort
 and it really should be automated. 
 
-This repository contains some configuration files for some of the tools I
-commonly use. To use it, clone the repository to your local machine and run
-the `setupDevEnv.sh` bash script. This will replace the configuration files
-with those in this repository and then source those that need to be source.
-Then the environment will be all set up with just a few commands. Once the 
-script has been run, it can be executed again and the most recently replaced
-settings can be restored. However, only the most recent settings can be 
-restored. 
-
-**Note:** Executable privileges will need to be added to the script for it 
-to be run: `chmod +x setupDevEnv.sh`. Also, for the terminal to immediately 
-reflect the .bashrc changes, run the sript like this: `. ./setupDevEnv.sh`
-
-Enjoy!
-
-## Current Setup Configuration
-
-### .bashrc
-* Colored Terminal
-* Bash Aliases
-
-### .vimrc
-* Map `jk` to `Esc`
-
-### .gitignore_global
-* Ignore `.vscode/`
-* Runs `git config --global core.excludesfile ~/.gitignore_global`
-
-## Additions
-
+Currently, this repo only contains a setup script to configure Vim.
 As additional environmental conveniences come up, this should be expanded
 and maintained. This will make setting up a new environment easy and 
 repeatable. 
@@ -48,24 +19,13 @@ The `setupVim.sh` script will set everything up for you.
 Simply run `./setupVim.sh` and follow any prompts.
 Elevated privileges are required since additional packages are installed.
 
-This script will copy the .vimrc file to ~/.vimrc, install any dependencies,
-and install the plugins listed in the .vimrc.
+This script will copy the .vimrc file to ~/.vimrc, install vim and any
+dependencies, and install the plugins listed in the .vimrc file.
 See the script for details.
-
-Before doing the following, make sure the `.vimrc` file of this repo is copied
-to ~/.vimrc first.
-
-Install `vim-plug` to manage plugins more easily:
-
-```bash
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-Start Vim, and run the following to install the plugins defined in the .vimrc file:
 
 You can now start vim, and everything should be set up.
 
-To set up a project with YouCompleteMe
+### Set up a project with YouCompleteMe
 
 - To find the function signatures and so forth, you need to
   Generate a compilation database. This can be done when running cmake by 
