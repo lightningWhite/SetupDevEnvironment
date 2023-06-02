@@ -77,6 +77,8 @@ nnoremap ,f :NERDTreeFind<CR>
 
 " vim-clang-format Specific Settings
 let g:clang_format#auto_format=1 " Use a .clang-format file in the project
+" Specify different clang-format binary name if different than 'clang-format'
+" let g:clang_format#command="clang-format-11"
 
 " flazz/vim-colorschemes
 set t_Co=256 " Use 256 color mode to make sure colorschemes look correct
