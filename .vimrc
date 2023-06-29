@@ -82,7 +82,7 @@ let g:clang_format#auto_format=1 " Use a .clang-format file in the project
 
 " flazz/vim-colorschemes
 set t_Co=256 " Use 256 color mode to make sure colorschemes look correct
-colorscheme sean
+colorscheme lightningWhite
 
 "------------------------------------------------------------------------------
 

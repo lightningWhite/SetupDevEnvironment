@@ -21,3 +21,7 @@ vim +'PlugInstall --sync' +qa
 echo "Compiling and setting up YouCompleteMe..."
 sudo apt install build-essential cmake vim-nox python3-dev npm golang
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all)
+
+# Copy the custom colorscheme to the right location
+mkdir ~/.vim/colors
+cp ./lightningWhite.vim ~/.vim/colors
