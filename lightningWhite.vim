@@ -18,10 +18,10 @@ hi ErrorMsg		  	guifg=White  guibg=Red
 hi Search		  	guifg=white  guibg=Red
 hi MoreMsg		  	gui=bold  guifg=SeaGreen
 hi ModeMsg		  	gui=bold  guifg=White	guibg=Blue
-hi LineNr		  	ctermfg=white guifg=Yellow
+hi LineNr		  	ctermfg=yellow guifg=Yellow
 hi Question		  	gui=bold  guifg=Green
 hi StatusLineNC		cterm=none ctermfg=grey ctermbg=darkblue gui=NONE guifg=white guibg=darkblue
-hi StatusLine		cterm=none ctermfg=white ctermbg=darkblue gui=bold	guifg=white	guibg=darkblue
+hi StatusLine		cterm=none ctermfg=yellow ctermbg=darkblue gui=bold	guifg=white	guibg=darkblue
 hi VertSplit	  	gui=bold	guifg=White	guibg=darkblue
 hi Title			gui=bold	guifg=Magenta
 hi Visual			cterm=none ctermfg=white ctermbg=darkgreen gui=NONE		guifg=white guibg=darkgreen

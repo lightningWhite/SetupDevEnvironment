@@ -9,7 +9,12 @@ echo "Installing the vim-plug plugin manager..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-echo "Copying the .vimrc in this repo to ~/.vimrc..."
+# Copy the custom colorscheme to the right location
+mkdir ~/.vim/colors
+cp ./lightningWhite.vim ~/.vim/colors
+
+echo "Backing up the existing .vimrc and copying the .vimrc in this repo to ~/.vimrc..."
+mv ~/.vimrc ~/.vimrc_$(date +"%Y%m%d_%H%M%S")
 cp ./.vimrc ~/.vimrc
 
 # Install the plugins in the .vimrc file by running the following in vim
@@ -19,9 +24,5 @@ vim +'PlugInstall --sync' +qa
 
 # Install dependencies and compile YouCompleteMe
 echo "Compiling and setting up YouCompleteMe..."
-sudo apt install build-essential cmake vim-nox python3-dev npm golang
+sudo apt install build-essential cmake vim-nox python3-dev npm golang clang-format-11
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all)
-
-# Copy the custom colorscheme to the right location
-mkdir ~/.vim/colors
-cp ./lightningWhite.vim ~/.vim/colors
