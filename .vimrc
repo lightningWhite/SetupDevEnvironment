@@ -63,6 +63,8 @@ filetype plugin indent on    " required for Vundle
 " YouCompleteMe Specific Settings
 " Use the experimental semantic highlighting feature
 let g:ycm_enable_semantic_highlighting=1
+" Increase the maximum number of diagnostics that can be displayed
+let g:ycm_max_diagnostics_to_display=10000
 " GoTo shortcut
 nnoremap ,jd :YcmCompleter GoTo<CR>
 
