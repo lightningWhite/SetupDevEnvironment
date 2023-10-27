@@ -11,7 +11,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Copy the custom colorscheme to the right location
 echo "*** Seting up custom colorscheme... ***"
-mkdir ~/.vim/colors
+mkdir -p ~/.vim/colors
 cp ./lightningWhite.vim ~/.vim/colors
 
 echo "*** Backing up the existing .vimrc and copying the .vimrc in this repo to ~/.vimrc... ***"
@@ -47,5 +47,8 @@ echo "*** Compiling and setting up YouCompleteMe... ***"
 echo "*** Configuring git to use vim... ***"
 git config --global core.editor vim
 git config --global merge.tool vimdiff
+# Ignore YouCompleteMe-generated clangd cache directory in repos
+echo "*.cache" >> ~/.gitignore
+git config --global core.excludesFile ~/.gitignore
 
 echo "*** Done setting up development environment! ***"
