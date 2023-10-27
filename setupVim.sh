@@ -43,4 +43,9 @@ sudo apt-get install build-essential vim-nox python3-dev npm golang clang-format
 echo "*** Compiling and setting up YouCompleteMe... ***"
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all)
 
+# User vim with git
+echo "*** Configuring git to use vim... ***"
+git config --global core.editor vim
+git config --global merge.tool vimdiff
+
 echo "*** Done setting up development environment! ***"
