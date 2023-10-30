@@ -41,7 +41,7 @@ echo "*** Installing other YouCompleteMe dependencies... ***"
 sudo apt-get install build-essential vim-nox python3-dev npm golang clang-format-11 openjdk-19-jre
 
 echo "*** Compiling and setting up YouCompleteMe... ***"
-(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all)
+(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all) # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
 
 # User vim with git
 echo "*** Configuring git to use vim... ***"
@@ -52,6 +52,6 @@ echo "*.cache" >> ~/.gitignore
 git config --global core.excludesFile ~/.gitignore
 
 echo ""
-echo "You may need to install 'gcc-12' for clang-tidy to work correctly in some situations."
+echo "You may need to install 'g++-12' for symantic completion to work correctly in some situations."
 echo ""
 echo "*** Done setting up development environment! ***"
