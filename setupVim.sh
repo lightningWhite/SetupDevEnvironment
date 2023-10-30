@@ -51,4 +51,7 @@ git config --global merge.tool vimdiff
 echo "*.cache" >> ~/.gitignore
 git config --global core.excludesFile ~/.gitignore
 
+echo ""
+echo "You may need to install 'gcc-12' for clang-tidy to work correctly in some situations."
+echo ""
 echo "*** Done setting up development environment! ***"
