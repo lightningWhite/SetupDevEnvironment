@@ -17,7 +17,8 @@ repeatable.
 
 The `setupVim.sh` script will set everything up for you.
 Simply run `./setupVim.sh` and follow any prompts.
-Elevated privileges are required since additional packages are installed.
+Elevated privileges are required during script execution since some steps
+require additional packages to be installed.
 
 This script will copy the .vimrc file to ~/.vimrc, install vim and any
 dependencies, and install the plugins listed in the .vimrc file.
