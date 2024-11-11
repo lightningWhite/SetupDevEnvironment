@@ -9,9 +9,10 @@ fi
 # on some older systems (e.g. Ubuntu 22.04) to get a new enough version.
 # This also allows us to enable python3 and clipboard support in the build.
 echo "*** Building and installing Vim... ***"
-sudo apt-get install git curl libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
-git clone https://github.com/vim/vim.git || (cd vim ; git pull)
-(cd vim/src && ./configure --enable-python3interp=yes --with-x && sudo make install)
+sudo apt-get remove vim --assume-yes # Remove conflicting versions
+sudo apt-get install git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
+git clone https://github.com/vim/vim.git >> /dev/null || (cd vim ; git pull)
+(cd vim && ./configure --enable-python3interp=yes --with-x && sudo make install)
 
 # Install vim-plug Package Manager
 echo "*** Installing the vim-plug plugin manager... ***"
@@ -49,7 +50,7 @@ sudo apt-get install cmake
 
 # Install other dependencies
 echo "*** Installing other YouCompleteMe dependencies... ***"
-sudo apt-get install build-essential python3-dev npm golang clang-format-11 openjdk-19-jre
+sudo apt-get install build-essential python3-dev npm golang clang-format-11 openjdk-21-jre
 
 echo "*** Compiling and setting up YouCompleteMe... ***"
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all) # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
