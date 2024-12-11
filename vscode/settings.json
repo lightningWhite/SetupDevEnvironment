@@ -1,0 +1,55 @@
+{
+    // vim settings
+    "vim.easymotion": false,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+    ],
+    "vim.leader": ",",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-n>": false
+    },
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "nerdtree.alwaysShowSidebar": true,
+    "nerdtree.hideSidebarWhenOpenFile": false,
+    "editor.tabSize": 2,
+    "gitlens.graph.minimap.additionalTypes": [
+        "pullRequests",
+        "stashes",
+        "remoteBranches",
+        "localBranches",
+        "tags"
+    ],
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "clang-format.executable": "clang-format-11",
+    "editor.formatOnSave": true
+}

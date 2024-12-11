@@ -31,13 +31,14 @@ You can now start vim, and everything should be set up.
 - To find the function signatures and so forth, you need to
   Generate a compilation database. This can be done when running cmake by 
   adding the required flag to the rest of them:
-  `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`.
+  `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`. Note that this is typically already
+  turned on by default.
 - Then symlink the generated `compile_commands.json` file to the root of the
   project: `ln -sf ~/full/path/to/compile_commands.json ~/full/path/to/project/root`
 - Now when you open a file within the project, things should work
 - Here's an example of a compile command that can be run from anywhere to compile
   a cmake C++ project:
-  `(cd ~/path/to/build_dir/; cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DDEBIAN_BUILD=True -DCMAKE_BUILD_TYPE=Debug; make -j $(nproc);)`
+  `(cd ~/path/to/build_dir/; cmake ../srcDir -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DDEBIAN_BUILD=True -DCMAKE_BUILD_TYPE=Debug; make -j $(nproc);)`
 
 To use vim as the default editor, run `git config --global core.editor vim`.
 You can also setup git to use vimdiff as the merge conflict resolution tool.

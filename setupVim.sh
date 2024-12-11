@@ -36,26 +36,38 @@ vim +'PlugInstall --sync' +qa
 ## Setup YouCompleteMe ##
 
 echo "*** Installing cmake... ***"
-# There seem to be keyring issues with installing cmake this way... (2024-10-29)
-# For now, we'll just install the version in the ubuntu default repos
-## See https://apt.kitware.com/ for installing cmake (required for building YouCompleteMe)
-#sudo apt-get update && sudo apt-get install ca-certificates gpg wget
-#wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-## Specific to Ubuntu Jammy - modify if needed
-#echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-#sudo apt-get update
-#sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
-#sudo apt-get install kitware-archive-keyring
 sudo apt-get install cmake
 
 # Install other dependencies
 echo "*** Installing other YouCompleteMe dependencies... ***"
-sudo apt-get install build-essential python3-dev npm golang clang-format-11 openjdk-21-jre
+## Note that clang-format-11 allows formatting on save (see the .vimrc)
+## Note that clangd-15 allows clang-tidy errors to be displayed in the editor (see the .vimrc)
+sudo apt-get install build-essential python3-dev npm golang clang-format-11 clangd-15 openjdk-21-jre
 
 echo "*** Compiling and setting up YouCompleteMe... ***"
-(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all) # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
+#(cd ~/.vim/plugged/YouCompleteMe && \
+#  ./install.py \ # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
+#  #--all # Note: This used to work, but on Ubuntu 22.04 the 'go' completer failed
+#        # to install, preventing the rest from working. So... Selecting the others
+#        # manually.
+#  #--clang-completer \ # C-family semantic completion engine through libclang
+#  --clangd-completer  # C-family semantic completion engine through clangd lsp server
+#  #--cs-completer \ # For C#
+#  #--go-completer \ # For Go (broken on Ubuntu 22.04)
+#  #--rust-completer \
+#  #--rust-toolchain-version \
+#  #--java-completer \
+#  #--ts-completer \ # JavaScript and TypeScript
+#  #--system-libclang \ # Use system libclang - Not recommended or supported
+#  #--msvc \ # Specify Microsoft Visual Studio version
+#  #--enable-coverage \ # Enable gcov coverage
+#  #--enable-debug \ # Build ycm_core lib with debug symbols
+#  #--build-dir \ # Specify build directory
+#  ) 
 
-# User vim with git
+(cd ~/.vim/plugged/YouCompleteMe && ./install.py --clangd-completer)
+
+# Use vim with git
 echo "*** Configuring git to use vim... ***"
 git config --global core.editor vim
 git config --global merge.tool vimdiff

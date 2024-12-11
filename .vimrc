@@ -39,6 +39,12 @@ Plug 'rhysd/vim-clang-format'
 " A whole bunch of colorschemes
 Plug 'flazz/vim-colorschemes'
 
+" Ctrl-p to search for anything
+Plug 'kien/ctrlp.vim'
+
+" Status bar
+Plug 'Lokaltog/powerling', {'rtp': 'powerline/bindings/vim/'}
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -65,9 +71,12 @@ filetype plugin indent on    " required for Vundle
 let g:ycm_enable_semantic_highlighting=1
 " Increase the maximum number of diagnostics that can be displayed
 let g:ycm_max_diagnostics_to_display=10000
+" Use installed clangd, not YCM-bundled clangd for clant-tidy support
+let g:ycm_clangd_binary_path=exepath("clangd-15")
+" Automatically close the preview window
+let g:ycm_autoclose_preview_window_after_completion=1
 " GoTo shortcut
 nnoremap ,jd :YcmCompleter GoTo<CR>
-
 
 " NERDTree Specific Settings
 " Mapping to toggle the NERDTree window
