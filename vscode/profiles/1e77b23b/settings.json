@@ -1,5 +1,8 @@
 {
-    // vim settings
+    // General Editor Settings
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    // Vim Settings
     "vim.easymotion": false,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
@@ -24,7 +27,7 @@
             "commands": [
                 ":nohl"
             ]
-        },
+        }
     ],
     "vim.leader": ",",
     "vim.handleKeys": {
@@ -36,9 +39,10 @@
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
     },
+    // Nerd Tree Settings
     "nerdtree.alwaysShowSidebar": true,
     "nerdtree.hideSidebarWhenOpenFile": false,
-    "editor.tabSize": 2,
+    // GitLense Settings
     "gitlens.graph.minimap.additionalTypes": [
         "pullRequests",
         "stashes",
@@ -46,14 +50,21 @@
         "localBranches",
         "tags"
     ],
+    // CMake Settings
     "cmake.pinnedCommands": [
         "workbench.action.tasks.configureTaskRunner",
         "workbench.action.tasks.runTask"
     ],
+    // Clang Format Settings
     "clang-format.executable": "clang-format-11",
-    "editor.formatOnSave": true,
-    "C_Cpp.default.compileCommands": "/home/dhornberger/code/programs/sigma/bld/ubuntu22/compile_commands.json",
+    // C++ Settings
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/../bld/ubuntu22/compile_commands.json",
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
-    }
+    },
+    "clang-tidy.executable": "clang-tidy-15",
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "C_Cpp.codeAnalysis.clangTidy.path": "clang-tidy-15",
+    // Clang-Tidy Settings
+    "clang-tidy.buildPath": "${workspaceFolder}/../bld/ubuntu22",
 }
