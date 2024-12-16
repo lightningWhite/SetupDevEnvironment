@@ -71,7 +71,7 @@ filetype plugin indent on    " required for Vundle
 let g:ycm_enable_semantic_highlighting=1
 " Increase the maximum number of diagnostics that can be displayed
 let g:ycm_max_diagnostics_to_display=10000
-" Use installed clangd, not YCM-bundled clangd for clant-tidy support
+" Use installed clangd, not YCM-bundled clangd for clang-tidy support
 let g:ycm_clangd_binary_path=exepath("clangd-15")
 " Automatically close the preview window
 let g:ycm_autoclose_preview_window_after_completion=1

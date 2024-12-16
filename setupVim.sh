@@ -5,12 +5,12 @@ if [[ "$EUID" -eq 0 ]]; then
   exit 1
 fi
 
-# Since YouCompleteMe requires >=Vim 9.1, we have to build from source
+# Since YouCompleteMe now (Dec 2024) requires >=Vim 9.1, we have to build from source
 # on some older systems (e.g. Ubuntu 22.04) to get a new enough version.
 # This also allows us to enable python3 and clipboard support in the build.
 echo "*** Building and installing Vim... ***"
 sudo apt-get remove vim --assume-yes # Remove conflicting versions
-sudo apt-get install git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
+sudo apt-get install --assume-yes git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
 git clone https://github.com/vim/vim.git >> /dev/null || (cd vim ; git pull)
 (cd vim && ./configure --enable-python3interp=yes --with-x && sudo make install)
 
@@ -36,36 +36,27 @@ vim +'PlugInstall --sync' +qa
 ## Setup YouCompleteMe ##
 
 echo "*** Installing cmake... ***"
-sudo apt-get install cmake
+sudo apt-get --assume-yes install cmake
 
 # Install other dependencies
 echo "*** Installing other YouCompleteMe dependencies... ***"
 ## Note that clang-format-11 allows formatting on save (see the .vimrc)
 ## Note that clangd-15 allows clang-tidy errors to be displayed in the editor (see the .vimrc)
-sudo apt-get install build-essential python3-dev npm golang clang-format-11 clangd-15 openjdk-21-jre
+##    It will use whatever clang-tidy version is bundled in with clangd-15.
+sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.20 clang-format-11 clangd-15 openjdk-21-jre
+
+# Since we had to install a newer version of go than the default golang, we need
+# to update the path so it can be found. This newer version is required by YouCompleteMe.
+sudo echo "# Add 'go' to the path for vim" >> ~/.profile
+sudo echo "PATH=${PATH}:/usr/lib/go-1.20/bin/" >> ~/.profile
+# Export it here as well so the updated path is available in this script
+export PATH=${PATH}:/usr/lib/go-1.20/bin/
 
 echo "*** Compiling and setting up YouCompleteMe... ***"
-#(cd ~/.vim/plugged/YouCompleteMe && \
-#  ./install.py \ # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
-#  #--all # Note: This used to work, but on Ubuntu 22.04 the 'go' completer failed
-#        # to install, preventing the rest from working. So... Selecting the others
-#        # manually.
-#  #--clang-completer \ # C-family semantic completion engine through libclang
-#  --clangd-completer  # C-family semantic completion engine through clangd lsp server
-#  #--cs-completer \ # For C#
-#  #--go-completer \ # For Go (broken on Ubuntu 22.04)
-#  #--rust-completer \
-#  #--rust-toolchain-version \
-#  #--java-completer \
-#  #--ts-completer \ # JavaScript and TypeScript
-#  #--system-libclang \ # Use system libclang - Not recommended or supported
-#  #--msvc \ # Specify Microsoft Visual Studio version
-#  #--enable-coverage \ # Enable gcov coverage
-#  #--enable-debug \ # Build ycm_core lib with debug symbols
-#  #--build-dir \ # Specify build directory
-#  ) 
-
-(cd ~/.vim/plugged/YouCompleteMe && ./install.py --clangd-completer)
+# Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
+# --clangd-completed: C-family semantic completion engine through clangd lsp server
+# --system-libclang: Allow use of the system's libclang (see the .vimrc) - Technically not recommended or supported
+(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all --clangd-completer --system-libclang)
 
 # Use vim with git
 echo "*** Configuring git to use vim... ***"
