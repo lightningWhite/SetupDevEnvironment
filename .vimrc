@@ -25,7 +25,7 @@ call plug#begin()
 " Keep Plugin commands between plug#begin/end.
 
 " Git-in-Vim plugin
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Code auto-completion
 Plug 'ycm-core/YouCompleteMe'
@@ -44,6 +44,9 @@ Plug 'kien/ctrlp.vim'
 
 " Status bar
 Plug 'Lokaltog/powerling', {'rtp': 'powerline/bindings/vim/'}
+
+" Markdown Rendering
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -71,10 +74,24 @@ filetype plugin indent on    " required for Vundle
 let g:ycm_enable_semantic_highlighting=1
 " Increase the maximum number of diagnostics that can be displayed
 let g:ycm_max_diagnostics_to_display=10000
-" Use installed clangd, not YCM-bundled clangd for clang-tidy support
-let g:ycm_clangd_binary_path=exepath("clangd-15")
 " Automatically close the preview window
 let g:ycm_autoclose_preview_window_after_completion=1
+
+"--- Clangd Settings ---
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching=0
+" Use clangd installed by the 'setupVim.sh' script, not YCM-bundled clangd for clang-tidy support
+let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_20.1.0/bin/clangd")
+
+" Pass additional args to clangd when it's started
+" -- Using '-j=1' will cause it to index one file at a time to see where errors
+"  may be happening
+" -- Using '-log=verbose' will provide additional logs for debugging
+" -- Using '-background-index=0' will make it only index the file you open
+"  rather than all of them in the background. This can be helpful if clangd is
+"  crashing on some file you never open, but it does make things slower.
+"let g:ycm_clangd_args = ['--clang-tidy=1', '--background-index=0']
+
 " GoTo shortcut
 nnoremap ,jd :YcmCompleter GoTo<CR>
 

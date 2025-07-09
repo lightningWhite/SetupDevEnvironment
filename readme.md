@@ -111,3 +111,17 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | Ctrl+w N | Enter vim text mode inside of an open terminal window (hit 'i' to exit) |
 | m\<character\> | Set a marker named <character> at cursor location |
 | \`\<character\> | Go to marker indicated by <character> |
+| Ctrl+p | Fuzzy search for file |
+
+## Customized VS Code Usage Tips
+
+Vim bindings are configured, so a lot of the above commands will work, but there
+are some differences.
+
+Here is a table of some helpful common commands:
+
+| Command  | Action |
+|----------|--------|
+| gh       | Display the hover help text on a symbol |
+| gd       | Go to declaration |
+| Ctrl+    | Open a terminal at the bottom |

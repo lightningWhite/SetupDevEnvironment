@@ -11,6 +11,7 @@ fi
 echo "*** Building and installing Vim... ***"
 sudo apt-get remove vim --assume-yes # Remove conflicting versions
 sudo apt-get install --assume-yes git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
+sudo npm -g install yarn instant-markdown-d # For markdown rendering with vim-instant-markdown plugin
 git clone https://github.com/vim/vim.git >> /dev/null || (cd vim ; git pull)
 (cd vim && ./configure --enable-python3interp=yes --with-x && sudo make install)
 
@@ -41,9 +42,19 @@ sudo apt-get --assume-yes install cmake
 # Install other dependencies
 echo "*** Installing other YouCompleteMe dependencies... ***"
 ## Note that clang-format-11 allows formatting on save (see the .vimrc)
-## Note that clangd-15 allows clang-tidy errors to be displayed in the editor (see the .vimrc)
-##    It will use whatever clang-tidy version is bundled in with clangd-15.
-sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.20 clang-format-11 clangd-15 openjdk-21-jre
+sudo apt-get install --assume-yes clang-format-11
+
+# Instead of apt installing an older version, we're going to use a newer version
+# of clangd in order to handle newer C++ features
+# Note that clangd allows clang-tidy errors, autocompletion, etc. to be active
+# in the editor (see the .vimrc). It will use whatever clang-tidy version is
+# bundled in with clangd.
+# Use 'let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_20.1.0/bin/clangd")' in .vimrc to actually use it
+# First, we'll install a few dependencies for clangd to work properly
+sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.20 openjdk-21-jre
+# Now we'll download the clangd binary
+wget https://github.com/clangd/clangd/releases/download/20.1.0/clangd-linux-20.1.0.zip -P /tmp
+unzip /tmp/clangd-linux-20.1.0.zip -d ~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/
 
 # Since we had to install a newer version of go than the default golang, we need
 # to update the path so it can be found. This newer version is required by YouCompleteMe.
