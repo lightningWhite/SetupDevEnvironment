@@ -113,6 +113,55 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | \`\<character\> | Go to marker indicated by <character> |
 | Ctrl+p | Fuzzy search for file |
 
+### Troubleshooting
+
+Here are a few things you can try to help in figuring out why autocompletion, etc. isn't working:
+
+View the YcmDebugInfo in Vim:
+
+```
+:YcmDebugInfo
+```
+
+See if "Clangd running" is there. If it's not, it probably crashed.
+
+You can look at the logs to try and see what happened:
+
+```
+:YcmToggleLogsa
+# Select the clangd_stderr....log file
+```
+
+Look through these to see if it tells you what's going on.
+You can increase the log verbosity by editing the .vimrc and adding a line like this:
+
+```
+let g:ycm_clangd_args = ["--log=verbose"]
+```
+
+You can also force it to only parse one file at a time by adding this arg:
+
+```
+let g:ycm_clangd_args = ["--log=verbose", "--j=1"]
+```
+
+This will likely tell you the last file it was processing before it crashed.
+You can turn off background indexing with the following arg so it only parses the file you have open:
+
+```
+let g:ycm_clangd_args = ["--background-index=0"]
+```
+
+With background indexing off, you can go open the suspected file and check to see if the clangd crashes on that file but not others.
+Then you can try commenting out code or whatever to see where the issue is.
+You can try updating to a newer version of clangd if there's something causing a crash.
+There are archives of clangd binaries you can just pull down and point YouCompleteMe to that newer binary to see how it handles that broken file.
+
+Make sure to check the logs to see if it found your `compile_commands.json` file.
+
+If autocompletion seems to be working, but clang-tidy checks aren't, look at the clangd logs and search for anything related to 'clang-tidy'.
+It's possible there's an argument in the .clang-tidy file that it doesn't like.
+
 ## Customized VS Code Usage Tips
 
 Vim bindings are configured, so a lot of the above commands will work, but there

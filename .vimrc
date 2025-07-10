@@ -84,13 +84,14 @@ let g:ycm_clangd_uses_ycmd_caching=0
 let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_20.1.0/bin/clangd")
 
 " Pass additional args to clangd when it's started
-" -- Using '-j=1' will cause it to index one file at a time to see where errors
+" -- Using '--j=1' will cause it to index one file at a time to see where errors
 "  may be happening
-" -- Using '-log=verbose' will provide additional logs for debugging
-" -- Using '-background-index=0' will make it only index the file you open
+" -- Using '--log=verbose' will provide additional logs for debugging
+" -- Using '--background-index=0' will make it only index the file you open
 "  rather than all of them in the background. This can be helpful if clangd is
 "  crashing on some file you never open, but it does make things slower.
-"let g:ycm_clangd_args = ['--clang-tidy=1', '--background-index=0']
+"let g:ycm_clangd_args = ['--clang-tidy', "--log=verbose"]
+let g:ycm_clangd_args = ["--log=verbose"]
 
 " GoTo shortcut
 nnoremap ,jd :YcmCompleter GoTo<CR>
