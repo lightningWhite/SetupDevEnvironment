@@ -124,6 +124,8 @@ View the YcmDebugInfo in Vim:
 ```
 
 See if "Clangd running" is there. If it's not, it probably crashed.
+Also, make sure the "Clangd executable" is the one setup by the setupVim.sh, not the one built-in with YouCompleteMe.
+If it's the wrong one, it probably can't find it properly and it may not work right.
 
 You can look at the logs to try and see what happened:
 

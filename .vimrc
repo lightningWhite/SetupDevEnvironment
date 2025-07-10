@@ -80,8 +80,11 @@ let g:ycm_autoclose_preview_window_after_completion=1
 "--- Clangd Settings ---
 " Let clangd fully control code completion
 let g:ycm_clangd_uses_ycmd_caching=0
-" Use clangd installed by the 'setupVim.sh' script, not YCM-bundled clangd for clang-tidy support
-let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_20.1.0/bin/clangd")
+" Use clangd installed by the 'setupVim.sh' script, not YCM-bundled clangd for clang-tidy support.
+" This must be an absolute path or vim will fallback to the built-in clangd
+" The clangd completer script is located here if needed for debugging:
+" ~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_completer.py
+let g:ycm_clangd_binary_path=exepath("/usr/local/bin/clangd")
 
 " Pass additional args to clangd when it's started
 " -- Using '--j=1' will cause it to index one file at a time to see where errors
@@ -90,8 +93,8 @@ let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/y
 " -- Using '--background-index=0' will make it only index the file you open
 "  rather than all of them in the background. This can be helpful if clangd is
 "  crashing on some file you never open, but it does make things slower.
-"let g:ycm_clangd_args = ['--clang-tidy', "--log=verbose"]
-let g:ycm_clangd_args = ["--log=verbose"]
+" -- Using '--clang-tidy=0' will turn off clang-tidy
+"let g:ycm_clangd_args = ['--clang-tidy=0', '--log=verbose', '--j=1', '--background-index=0', '--limit-results=1000']
 
 " GoTo shortcut
 nnoremap ,jd :YcmCompleter GoTo<CR>

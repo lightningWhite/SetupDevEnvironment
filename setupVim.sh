@@ -49,12 +49,17 @@ sudo apt-get install --assume-yes clang-format-11
 # Note that clangd allows clang-tidy errors, autocompletion, etc. to be active
 # in the editor (see the .vimrc). It will use whatever clang-tidy version is
 # bundled in with clangd.
-# Use 'let g:ycm_clangd_binary_path=exepath("~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/clangd_20.1.0/bin/clangd")' in .vimrc to actually use it
 # First, we'll install a few dependencies for clangd to work properly
 sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.20 openjdk-21-jre
-# Now we'll download the clangd binary
+
+echo "*** Installing clangd ***"
+# Now we'll download the clangd binary and install it to the system
 wget https://github.com/clangd/clangd/releases/download/20.1.0/clangd-linux-20.1.0.zip -P /tmp
-unzip /tmp/clangd-linux-20.1.0.zip -d ~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/completers/cpp/
+unzip /tmp/clangd-linux-20.1.0.zip -d /tmp
+# Use 'let g:ycm_clangd_binary_path=exepath("/usr/local/bin/clangd")' in .vimrc to actually use it
+sudo mv /tmp/clangd_20.1.0/bin/clangd /usr/local/bin
+sudo mv /tmp/clangd_20.1.0/lib/clang /usr/local/lib
+rm -rf /tmp/clangd*
 
 # Since we had to install a newer version of go than the default golang, we need
 # to update the path so it can be found. This newer version is required by YouCompleteMe.
