@@ -99,10 +99,10 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | I        | When in visual block mode, this will put the characters typed on every selected line after pressing 'jk' or Esc | 
 | 0        | Go to the first of the line |
 | $        | Go to the end of the line |
-| <line#>gg| Go to the line number
+| \<line#\>gg| Go to the line number
 | gg       | Go to the top of the buffer |
 | GG       | Go to the bottom of the buffer |
-|:colorscheme \<name\> | Change the colorscheme |
+| :colorscheme \<name\> | Change the colorscheme |
 | q\<character\> | Begin recording a macro (series of key commands), escape, press 'q' to stop recording |
 | @\<character\> | Execute the commands recorded in the macro identified by \<character\> |
 | #@\<character\> | Execute the macro # of times |
@@ -112,6 +112,15 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | m\<character\> | Set a marker named <character> at cursor location |
 | \`\<character\> | Go to marker indicated by <character> |
 | Ctrl+p | Fuzzy search for file |
+| :YcmComplete RefactorRename \<NewName\> | Refactor the name of a function or variable. Use the Quickfix window to review and save the changes. |
+| :copen | When used with RefactorRename, opens the Quickfix window to see the refactor changes. Hover and hit enter to go to the change. |
+| :cn | Go to the next quickfix item |
+| :cp | Go to the previous quickfix item |
+| Ctrl+z | Put vim in the background |
+| fg\<enter\> | Bring vim back into the foreground |
+| :diffg LO | When cursor is in the merge conflict region in the bottom window, use the LOCAL change in a git mergtool conflict resolution |
+| :diffg BA | When cursor is in the merge conflict region in the bottom window, use the BASE change in a git mergtool conflict resolution |
+| :diffg RE | When cursor is in the merge conflict region in the bottom window, use the REMOTE change in a git mergtool conflict resolution |
 
 ### Troubleshooting
 
