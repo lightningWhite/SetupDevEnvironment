@@ -185,3 +185,7 @@ Here is a table of some helpful common commands:
 | gh       | Display the hover help text on a symbol |
 | gd       | Go to declaration |
 | Ctrl+    | Open a terminal at the bottom |
+
+If you get `clangd` set up, you will likely need to install `g++-12` (or whatever compiler version you need) for the system includes to be recognized.
+Also, make sure your `compile_commands.json` file is symlinked to the root of your source code project for `clangd` to automatically find and load.
+`clangd` seemed to work a little faster and better than the more populate C++ extension's intellisense.
