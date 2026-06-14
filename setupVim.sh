@@ -13,7 +13,6 @@ sudo apt-get remove vim --assume-yes # Remove conflicting versions
 sudo apt-get install --assume-yes git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
 sudo npm -g install yarn instant-markdown-d # For markdown rendering with vim-instant-markdown plugin
 git clone https://github.com/vim/vim.git >> /dev/null || (cd vim ; git pull)
-(cd vim && ./configure --enable-python3interp=yes --with-x && sudo make install)
 
 # Install vim-plug Package Manager
 echo "*** Installing the vim-plug plugin manager... ***"
@@ -41,8 +40,8 @@ sudo apt-get --assume-yes install cmake
 
 # Install other dependencies
 echo "*** Installing other YouCompleteMe dependencies... ***"
-## Note that clang-format-11 allows formatting on save (see the .vimrc)
-sudo apt-get install --assume-yes clang-format-11
+## Note that clang-format allows formatting on save (see the .vimrc)
+sudo apt-get install --assume-yes clang-format-20
 
 # Instead of apt installing an older version, we're going to use a newer version
 # of clangd in order to handle newer C++ features
@@ -50,28 +49,33 @@ sudo apt-get install --assume-yes clang-format-11
 # in the editor (see the .vimrc). It will use whatever clang-tidy version is
 # bundled in with clangd.
 # First, we'll install a few dependencies for clangd to work properly
-sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.20 openjdk-21-jre
+sudo apt-get install --assume-yes build-essential python3-dev npm golang-1.24 openjdk-21-jre
 
 echo "*** Installing clangd ***"
-# Now we'll download the clangd binary and install it to the system
-wget https://github.com/clangd/clangd/releases/download/20.1.0/clangd-linux-20.1.0.zip -P /tmp
-unzip /tmp/clangd-linux-20.1.0.zip -d /tmp
-# Use 'let g:ycm_clangd_binary_path=exepath("/usr/local/bin/clangd")' in .vimrc to actually use it
-sudo mv /tmp/clangd_20.1.0/bin/clangd /usr/local/bin
-sudo mv /tmp/clangd_20.1.0/lib/clang /usr/local/lib
-rm -rf /tmp/clangd*
+# # You may be able to do something like this to install a specific version of clangd:
+# # Now we'll download the clangd binary and install it to the system
+# wget https://github.com/clangd/clangd/releases/download/20.1.0/clangd-linux-20.1.0.zip -P /tmp
+# unzip /tmp/clangd-linux-20.1.0.zip -d /tmp
+# # Use 'let g:ycm_clangd_binary_path=exepath("/usr/local/bin/clangd")' in .vimrc to actually use it
+# sudo mv /tmp/clangd_20.1.0/bin/clangd /usr/local/bin
+# sudo mv /tmp/clangd_20.1.0/lib/clang /usr/local/lib
+# rm -rf /tmp/clangd*
+# If a system-available apt package is available in the desired version,
+# prefer to use that.
+sudo apt-get install --assume-yes libclang-20-dev
 
 # Since we had to install a newer version of go than the default golang, we need
 # to update the path so it can be found. This newer version is required by YouCompleteMe.
 sudo echo "# Add 'go' to the path for vim" >> ~/.profile
-sudo echo "PATH=${PATH}:/usr/lib/go-1.20/bin/" >> ~/.profile
+sudo echo "PATH=${PATH}:/usr/lib/go-1.24/bin/" >> ~/.profile
 # Export it here as well so the updated path is available in this script
-export PATH=${PATH}:/usr/lib/go-1.20/bin/
+export PATH=${PATH}:/usr/lib/go-1.24/bin/
 
 echo "*** Compiling and setting up YouCompleteMe... ***"
 # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
 # --clangd-completed: C-family semantic completion engine through clangd lsp server
 # --system-libclang: Allow use of the system's libclang (see the .vimrc) - Technically not recommended or supported
+(cd vim && ./configure --enable-python3interp=yes --with-x --with-python3-command=python3.12 && sudo make install)
 (cd ~/.vim/plugged/YouCompleteMe && ./install.py --all --clangd-completer --system-libclang)
 
 # Use vim with git
