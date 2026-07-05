@@ -49,6 +49,43 @@ bottom. This makes it easy to see what your changes were, what the common
 parent is, and what is coming from the remote. Simply edit the bottom window
 to what it should be, save with :wqa. Then run `git commit` to finish the merge.
 
+### Claude Code Integration
+
+Adding the following alias to your `~/.bash_aliases` will allow opening vim and
+Claude side-by-side by typing `vc` in the project directory:
+
+```bash
+# Start (or reattach to) a tmux session named 'work' with vim in the
+# left pane and an interactive Claude Code session in the right pane,
+# both rooted in the current working directory.
+vc() {
+  if tmux has-session -t work 2>/dev/null; then
+    echo "Warning: a tmux 'work' session is already running (started elsewhere, possibly a different directory)."
+    read -p "Join it [j] or stop it and start fresh here [s]? (j/s) " -n 1 -r choice
+    echo
+    case "$choice" in
+      s|S)
+        tmux kill-session -t work
+        ;;
+      *)
+        tmux attach -t work
+        return
+        ;;
+    esac
+  fi
+
+  tmux new-session -d -s work -c "$PWD"
+  tmux send-keys -t work:0.0 'vim .' Enter
+  tmux split-window -h -t work -c "$PWD"
+  tmux send-keys -t work:0.1 'claude' Enter
+  tmux select-pane -t work:0.0
+  tmux attach -t work
+}
+```
+
+This requires `tmux` to be installed. You can switch between tmux windows
+with `Ctrl+b arrowKey`.
+
 ### Customized Vim Usage Tips
 
 Here are some commonly used key commands when using vim with the .vimrc in this repo.
@@ -121,6 +158,8 @@ Here are some commonly used key commands when using vim with the .vimrc in this 
 | :diffg LO | When cursor is in the merge conflict region in the bottom window, use the LOCAL change in a git mergtool conflict resolution |
 | :diffg BA | When cursor is in the merge conflict region in the bottom window, use the BASE change in a git mergtool conflict resolution |
 | :diffg RE | When cursor is in the merge conflict region in the bottom window, use the REMOTE change in a git mergtool conflict resolution |
+| ,cc | Ask Claude a question about the selected lines |
+| ,cD | Show a side-by-side diff of the lines Claude edited from ,cc in a separate vim tab |
 
 ### Troubleshooting
 

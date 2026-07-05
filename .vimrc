@@ -17,6 +17,9 @@
 " This also makes it so Vim doesn't try to be reverse compatible with Vi.
 set nocompatible
 
+" Set ',' as the leader key (used by <leader> mappings throughout this file)
+let mapleader = ","
+
 filetype off
 
 call plug#begin()
@@ -95,17 +98,23 @@ let g:ycm_clangd_binary_path=exepath("/usr/local/bin/clangd")
 "  crashing on some file you never open, but it does make things slower.
 " -- Using '--clang-tidy=0' will turn off clang-tidy
 "let g:ycm_clangd_args = ['--clang-tidy=0', '--log=verbose', '--j=1', '--background-index=0', '--limit-results=1000']
+" -- '--query-driver' allow-lists cross-compiler paths clangd may invoke to ask
+"  for their built-in system include dirs (needed for projects using a
+"  toolchain other than the host gcc/clang, e.g. PlatformIO/ESP-IDF's
+"  xtensa-esp32-elf-gcc). Purely additive: harmless for projects whose
+"  compile_commands.json reference compilers outside these globs.
+let g:ycm_clangd_args = ['--query-driver=' . expand('~/.platformio/packages/toolchain-xtensa-esp-elf/bin/*')]
 
 " GoTo shortcut
-nnoremap ,jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " NERDTree Specific Settings
 " Mapping to toggle the NERDTree window
-nnoremap ,t :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 " Mapping to focus the NERDTree window
 nnoremap ff :NERDTreeFocus<CR>
 " Mapping to open NERDTree at the file in the editor
-nnoremap ,f :NERDTreeFind<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
 " vim-clang-format Specific Settings
 let g:clang_format#auto_format=1 " Use a .clang-format file in the project
@@ -287,5 +296,64 @@ nnoremap <C-L> :nohl<CR><C-L>
 " clipboard. Also, if using this in WSL, VcXsrv needs to be
 " installed on Windows and stared using XLaunch. Selecting 
 " the default XLaunch settings works.
-:set clipboard=unnamedplus 
+:set clipboard=unnamedplus
+
+"------------------------------------------------------------
+" Claude Code CLI integration {{{1
+"
+" Workflow: run vim and `claude` as two panes in the same tmux session
+" (e.g. `tmux new-session -s work \; split-window -h`, vim on the left,
+" `claude` running interactively on the right). Select a range in vim,
+" hit <leader>cc, type a question, and it's pasted straight into the
+" already-running Claude session (no CLAUDE.md/session reload per call).
+" <leader>cD then shows a scoped before/after diff of just that
+" selection once Claude's edit lands on disk.
+"
+" Set this to match your tmux session:pane (check with `tmux list-panes -t work`)
+let g:claude_tmux_target = 'work:0.1'
+
+" Pick up file changes written externally (by Claude) without prompting
+set autoread
+" How long (ms) of inactivity before CursorHold fires and triggers checktime
+set updatetime=1000
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * checktime
+
+" Send the visually selected lines, plus a typed question, into the
+" Claude Code tmux pane. Remembers the selection so <leader>cD can later
+" show a scoped diff of just this region.
+function! SendToClaude() range
+  let g:claude_snap_start = line("'<")
+  let g:claude_snap_end   = line("'>")
+  let g:claude_snap_lines = getline(g:claude_snap_start, g:claude_snap_end)
+
+  let l:text = join(g:claude_snap_lines, "\n")
+  let l:question = input("Ask Claude: ")
+  call system('tmux set-buffer ' . shellescape(l:text . "\n\n" . l:question))
+  call system('tmux paste-buffer -t ' . g:claude_tmux_target)
+  call system('tmux send-keys -t ' . g:claude_tmux_target . ' Enter')
+endfunction
+vnoremap <leader>cc :<C-U>call SendToClaude()<CR>
+
+" Show a scoped diff of just the last selection sent to Claude: old
+" snapshot vs. whatever is now in that same line range, in two scratch
+" buffers. Everything else in the file is ignored.
+function! ShowClaudeScopedDiff()
+  checktime
+  if !exists('g:claude_snap_lines')
+    echom "No Claude snapshot yet -- send a selection with <leader>cc first."
+    return
+  endif
+  let l:new_lines = getline(g:claude_snap_start, g:claude_snap_end)
+
+  tabnew
+  setlocal buftype=nofile bufhidden=wipe noswapfile
+  call setline(1, g:claude_snap_lines)
+  diffthis
+  vnew
+  setlocal buftype=nofile bufhidden=wipe noswapfile
+  call setline(1, l:new_lines)
+  diffthis
+endfunction
+nnoremap <leader>cD :call ShowClaudeScopedDiff()<CR>
+"------------------------------------------------------------
 

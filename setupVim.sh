@@ -66,8 +66,13 @@ sudo apt-get install --assume-yes libclang-20-dev
 
 # Since we had to install a newer version of go than the default golang, we need
 # to update the path so it can be found. This newer version is required by YouCompleteMe.
-sudo echo "# Add 'go' to the path for vim" >> ~/.profile
-sudo echo "PATH=${PATH}:/usr/lib/go-1.24/bin/" >> ~/.profile
+# Guard against duplicate entries so re-running this script is idempotent, and
+# append to $PATH (rather than baking in a snapshot of it) so it doesn't clobber
+# whatever .bashrc/.profile already set up.
+if ! grep -qF '/usr/lib/go-1.24/bin/' ~/.profile; then
+  echo "# Add 'go' to the path for vim" >> ~/.profile
+  echo 'PATH="$PATH:/usr/lib/go-1.24/bin/"' >> ~/.profile
+fi
 # Export it here as well so the updated path is available in this script
 export PATH=${PATH}:/usr/lib/go-1.24/bin/
 
