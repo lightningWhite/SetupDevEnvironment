@@ -228,3 +228,12 @@ Here is a table of some helpful common commands:
 If you get `clangd` set up, you will likely need to install `g++-12` (or whatever compiler version you need) for the system includes to be recognized.
 Also, make sure your `compile_commands.json` file is symlinked to the root of your source code project for `clangd` to automatically find and load.
 `clangd` seemed to work a little faster and better than the more populate C++ extension's intellisense.
+
+## Issues
+
+- [ ] As of 20260707, it seems as though there is an issue in YCM where it
+      points to a removed version of jdtls. I had to manually edit `vim ~/.vim/plugged/YouCompleteMe/third_party/ycmd/build.py`
+      to point to the correct version, build id, and sha256. I could find that
+      in a place like this, but you'll have to find the current one:
+      https://download.eclipse.org/jdtls/milestones/1.60.0/. I turned on verbose
+      mode to help with this.

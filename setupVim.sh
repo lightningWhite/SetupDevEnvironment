@@ -9,7 +9,6 @@ fi
 # on some older systems (e.g. Ubuntu 22.04) to get a new enough version.
 # This also allows us to enable python3 and clipboard support in the build.
 echo "*** Building and installing Vim... ***"
-sudo apt-get remove vim --assume-yes # Remove conflicting versions
 sudo apt-get install --assume-yes git curl libncurses-dev libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev # Needed for clipboard support
 sudo npm -g install yarn instant-markdown-d # For markdown rendering with vim-instant-markdown plugin
 git clone https://github.com/vim/vim.git >> /dev/null || (cd vim ; git pull)
@@ -76,12 +75,13 @@ fi
 # Export it here as well so the updated path is available in this script
 export PATH=${PATH}:/usr/lib/go-1.24/bin/
 
-echo "*** Compiling and setting up YouCompleteMe... ***"
+echo "*** Compiling and setting up Vim and YouCompleteMe... ***"
 # Note: CC=gcc-12 CXX=g++12 can be specified before ./install.py if needed
 # --clangd-completed: C-family semantic completion engine through clangd lsp server
 # --system-libclang: Allow use of the system's libclang (see the .vimrc) - Technically not recommended or supported
+sudo apt-get remove vim --assume-yes # Remove conflicting versions first
 (cd vim && ./configure --enable-python3interp=yes --with-x --with-python3-command=python3.12 && sudo make install)
-(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all --clangd-completer --system-libclang)
+(cd ~/.vim/plugged/YouCompleteMe && ./install.py --all --clangd-completer --system-libclang --verbose)
 
 # Use vim with git
 echo "*** Configuring git to use vim... ***"
@@ -90,6 +90,10 @@ git config --global merge.tool vimdiff
 # Ignore YouCompleteMe-generated clangd cache directory in repos
 echo "*.cache" >> ~/.gitignore
 git config --global core.excludesFile ~/.gitignore
+
+# Make sure everything can be found
+source ~/.bashrc
+source ~/.profile
 
 echo ""
 echo "You may need to install 'g++-12' for symantic completion to work correctly in some situations."
