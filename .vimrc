@@ -255,6 +255,10 @@ set splitright
 " Set the terminal window size so it doesn't take up half the screen
 "set termwinsize=10x0
 
+" Use bar in insert mode, block in normal mode
+let &t_SI = "\e[6 q"   " steady bar (insert)
+let &t_EI = "\e[2 q"   " restore steady block (insert -> normal)
+let &t_RS = "\e[2 q"   " restore steady block (for other restores)
 
 "------------------------------------------------------------
 " Indentation options {{{1
